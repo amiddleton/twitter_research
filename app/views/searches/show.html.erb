@@ -1,9 +1,10 @@
 <pre>
-<%= @results.inspect %>
+<%= @tweets.inspect %>
 </pre>
 
-<ul>
-  <% @results['results'].each do |r| %>
-    <li><%= r['text'] %></li>
+<ol>
+  <% @tweets.each do |r| %>
+    <li><%= r.text %></li>
+    <li><%= r.user %></li>
   <% end %>
-  </ul>
+  </ol>
