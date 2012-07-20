@@ -15,4 +15,18 @@ class TweetTest < ActiveSupport::TestCase
 
     assert_equal("2013, Football, Huskers", tweet.suggested_categories)
   end
+
+  def test_setting_categories_from_a_string
+    tweet = Tweet.new
+    cat = Category.where(title: "2013").first
+    assert(cat)
+
+    tweet.categories << cat
+    assert_equal(1, tweet.categories.size)
+
+    tweet.categories_as_string = "Football, Huskers"
+    assert_equal(2, tweet.categories.size)
+    assert_equal(%w(Football Huskers), tweet.categories.map(&:title).sort)
+
+  end
 end
