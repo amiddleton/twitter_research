@@ -2,9 +2,21 @@
 <%= @tweets.inspect %>
 </pre>
 
+<h1>You searched for <%= params[:q] %></h1>
+
 <ol>
   <% @tweets.each do |r| %>
+    <img src="<%= r.profile_image_url %>" height = "50" width = "50"/>
     <li><%= r.text %></li>
     <li><%= r.user %></li>
-  <% end %>
+    <% tweet = Tweet.new(:twitter_user => r.user,
+                         :tweeted_text => r.text,
+                         :tweeted_at => r.time) %>
+    <%= form_for(tweet) do |form| %>
+      <%= form.hidden_field(:twitter_user) %>
+      <%= form.hidden_field(:tweeted_text) %>
+      <%= form.hidden_field(:tweeted_at) %>
+      <%= form.submit('Save') %>
+    <% end %>
+    <% end %>
   </ol>
