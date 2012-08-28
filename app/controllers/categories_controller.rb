@@ -13,12 +13,17 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
-    respond_with(@category)
+    respond_with(@category) do |format|
+      format.js {render(partial: 'form', content_type: "text/html")}
+    end
   end
 
   def create
     @category = Category.create(params[:category])
-    respond_with(@category, location: categories_url)
+    respond_with(@category, location: categories_url) do |format|
+      format.js {render(partial: 'category',
+          object: @category, content_type: "text/html")}
+    end
   end
 
   def edit
@@ -35,6 +40,8 @@ class CategoriesController < ApplicationController
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
-    respond_with(@category)
+    respond_with(@category) do |format|
+      format.js {render(:nothing => true)}
+    end
   end
 end
