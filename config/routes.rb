@@ -3,7 +3,7 @@ TwitterResearch::Application.routes.draw do
 
   root(:to => 'searches#index')
   resources(:searches)
-
+  resources(:categories)
   resources(:tweets) do
     resources(:notes)
   end
