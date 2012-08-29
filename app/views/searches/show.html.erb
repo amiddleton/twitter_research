@@ -1,10 +1,7 @@
-<pre>
-<%= @tweets.inspect %>
-</pre>
 
 <h1>You searched for <%= params[:q] %></h1>
 
-<ol>
+<ul>
   <% @tweets.each do |r| %>
     <img src="<%= r.profile_image_url %>" height = "50" width = "50"/>
     <li><%= r.text %></li>
@@ -19,4 +16,4 @@
       <%= form.submit('Save') %>
     <% end %>
     <% end %>
-  </ol>
+  </ul>
